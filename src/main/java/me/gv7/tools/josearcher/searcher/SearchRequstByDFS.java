@@ -113,7 +113,7 @@ public class SearchRequstByDFS {
         try {
             // 如果已经搜索过这个对象就返回不再继续搜索
             // 注意：Set.contains 可能存在空指针异常
-            if (!visited.contains(filed_object)) {
+            if (visited != null && !visited.contains(filed_object)) {
                 visited.add(filed_object);
             } else {
                 return;
@@ -150,6 +150,10 @@ public class SearchRequstByDFS {
         if(clazz.isArray()){
             try {
                 //Object[] 没有属性
+                String name = filed_object.getClass().getName();
+                if(filed_object == null || name.startsWith("[Z") || name.startsWith("[F") ||name.startsWith("[C") || name.startsWith("[B") || name.startsWith("[[B") || name.startsWith("[I") || name.startsWith("[D") || name.startsWith("[J")|| name.startsWith("[S")){
+                    return;
+                }
                 Object[] obj_arr = (Object[]) filed_object;
 
                 if (obj_arr != null && obj_arr.length > 0) {
@@ -227,9 +231,9 @@ public class SearchRequstByDFS {
 
                             Iterator<String> iter = map.keySet().iterator();
                             while (iter.hasNext()) {
-                                String key = iter.next();
+                                Object key = iter.next();
                                 Object value = map.get(key);
-                                String map_name = String.format("[%s]", key);
+                                String map_name = String.format("[%s]", key.toString());
                                 searchObject(map_name, value, tmp_log_chain, current_depth);
                             }
                         }
@@ -242,7 +246,8 @@ public class SearchRequstByDFS {
                     try {
                         //属性是数组类型则遍历
                         Object obj = field.get(filed_object);
-                        if(obj == null){
+                        String name = obj.getClass().getName();
+                        if(obj == null || name.startsWith("[Z") || name.startsWith("[F") ||name.startsWith("[C") || name.startsWith("[B") || name.startsWith("[[B") || name.startsWith("[I") || name.startsWith("[D") || name.startsWith("[J")|| name.startsWith("[S")){
                             continue;
                         }
 

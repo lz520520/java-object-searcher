@@ -134,7 +134,7 @@ public class SearchRequstByBFS {
             try {
                 //被访问过了，就不访问，防止死循环
                 // 注意：Set.contains 可能存在空指针异常
-                if (!visited.contains(filed_object)) {
+                if (visited != null && !visited.contains(filed_object)) {
                     visited.add(filed_object);
 
                     if (log_chain != null && !log_chain.equals("")) {
@@ -174,6 +174,10 @@ public class SearchRequstByBFS {
                         current_depth++;
                         try {
                             //Object[] 没有属性
+                            String name = filed_object.getClass().getName();
+                            if(filed_object == null || name.startsWith("[Z") || name.startsWith("[F") ||name.startsWith("[C") || name.startsWith("[B") || name.startsWith("[[B") || name.startsWith("[I") || name.startsWith("[D") || name.startsWith("[J")|| name.startsWith("[S")){
+                                continue;
+                            }
 
                             Object[] obj_arr = (Object[]) filed_object;
 
@@ -272,6 +276,10 @@ public class SearchRequstByBFS {
                                     current_depth++;
                                     Object[] objArr = null;
                                     try {
+                                        String name = obj.getClass().getName();
+                                        if(obj == null || name.startsWith("[Z") || name.startsWith("[F") || name.startsWith("[C") || name.startsWith("[B") || name.startsWith("[[B") || name.startsWith("[I") || name.startsWith("[D") || name.startsWith("[J")|| name.startsWith("[S")){
+                                            continue;
+                                        }
                                         objArr = (Object[]) obj;
                                     } catch (Exception e2){
                                         LogUtil.saveThrowableInfo(e2, this.err_log_file);
