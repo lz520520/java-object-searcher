@@ -6,10 +6,10 @@ import java.util.List;
 import java.util.Map;
 
 public class TestClass extends TestBaseClass {
-    private TestBaseClass base;
-    private List<Object> lists = new ArrayList();
-    private String[] strs = new String[]{"1","2","3"};
-    private Map<String,Object> map = new HashMap<String,Object>();
+    public TestBaseClass base;
+    public List<Object> lists = new ArrayList();
+    public String[] strs = new String[]{"1","2","3"};
+    public Map<String,Object> map = new HashMap<String,Object>();
 
     public TestClass(){
         base = new TestBaseClass();

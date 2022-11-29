@@ -31,6 +31,16 @@ public class MatchUtil {
             boolean isInFieldName = false;
             boolean isInFieldValue = false;
             boolean isInFieldType = false;
+
+            //判断是否同一个对象
+            if(keyword.getField_object() != null){  // object字段覆盖其他字段，最高优先级判断
+                if(field_value == keyword.getField_object()){
+                    return true;
+                }else {
+                    return false;
+                }
+            }
+
             //属性名
             if(keyword.getField_name() != null){
                 if(isIn(field_name,keyword.getField_name(),false)){

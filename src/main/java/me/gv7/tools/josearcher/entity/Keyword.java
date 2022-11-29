@@ -9,6 +9,15 @@ public class Keyword {
     private String field_name;
     private String field_value;
     private String field_type;
+    private Object field_object;    // 精确搜索指定内存对象
+
+    public Object getField_object() {
+        return field_object;
+    }
+
+    public void setField_object(Object field_object) {
+        this.field_object = field_object;
+    }
 
     public Keyword(){}
 
@@ -16,6 +25,7 @@ public class Keyword {
         this.field_name = builder.field_name;
         this.field_type = builder.field_type;
         this.field_value = builder.field_value;
+        this.field_object = builder.field_object;
 
     }
 
@@ -68,6 +78,13 @@ public class Keyword {
         private String field_name;
         private String field_value;
         private String field_type;
+
+        private Object field_object;
+
+        public Builder setField_object(Object field_object) {
+            this.field_object = field_object;
+            return this;
+        }
 
         public Builder setField_name(String field_name) {
             this.field_name = field_name;
