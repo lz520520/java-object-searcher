@@ -33,7 +33,7 @@ public class CheckUtil {
                 "class java.lang.Float".equals(strType) ||
                 "class java.lang.Boolean".equals(strType) ||
                 "class java.lang.String".equals(strType) ||
-                "class java.lang.Class".equals(strType) ||
+//                "class java.lang.Class".equals(strType) ||
                 "class java.lang.Character".equals(strType)){
             return true;
         }else {

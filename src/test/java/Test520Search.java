@@ -1,6 +1,7 @@
 import me.gv7.tools.josearcher.entity.Blacklist;
 import me.gv7.tools.josearcher.entity.Keyword;
 import me.gv7.tools.josearcher.searcher.SearchRequstByBFS;
+import me.gv7.tools.josearcher.searcher.SearchRequstByDFS;
 import me.gv7.tools.josearcher.utils.CommonUtil;
 
 import java.util.ArrayList;
@@ -12,6 +13,7 @@ import java.util.List;
  */
 
 public class Test520Search {
+    public static String test = "test";
     public static void main(String[] args) {
         test();
 
@@ -57,24 +59,24 @@ public class Test520Search {
     static void  test() {
         //设置搜索类型包含Request关键字的对象
         List<Keyword> keys = new ArrayList();
-        keys.add(new Keyword.Builder().setField_name("single").build());
+        keys.add(new Keyword.Builder().setField_name("test").setField_value("test").build());
 //定义黑名单
         List<Blacklist> blacklists = new ArrayList();
-        blacklists.add(new Blacklist.Builder().setField_type("java.io.File").build());
-        blacklists.add(new Blacklist.Builder().setField_type("Exception").build());
-        blacklists.add(new Blacklist.Builder().setField_name("contextClassLoader").build());
+//        blacklists.add(new Blacklist.Builder().setField_type("java.io.File").build());
+//        blacklists.add(new Blacklist.Builder().setField_type("Exception").build());
+//        blacklists.add(new Blacklist.Builder().setField_name("contextClassLoader").build());
 //        blacklists.add(new Blacklist.Builder().setField_type("ReferenceQueue$Lock").build());
 
 
 //新建一个广度优先搜索Thread.currentThread()的搜索器
-        SearchRequstByBFS searcher = new SearchRequstByBFS(Thread.currentThread(),keys);
-// SearchRequstByDFS searcher = new SearchRequstByDFS(Thread.currentThread(),keys);
+//        SearchRequstByBFS searcher = new SearchRequstByBFS(Thread.currentThread(),keys);
+ SearchRequstByDFS searcher = new SearchRequstByDFS(Thread.currentThread(),keys);
 // 设置黑名单
         searcher.setBlacklists(blacklists);
 //打开调试模式,会生成log日志
         searcher.setIs_debug(true);
 //挖掘深度为20
-        searcher.setMax_search_depth(10);
+        searcher.setMax_search_depth(12);
 //设置报告保存位置
         searcher.setReport_save_path(".");
         searcher.searchObject();

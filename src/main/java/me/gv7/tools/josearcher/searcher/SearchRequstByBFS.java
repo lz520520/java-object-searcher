@@ -155,7 +155,12 @@ public class SearchRequstByBFS {
                     System.out.println(new_log_chain);
 
                     // 添加新节点到队列
-                    Class clazz = filed_object.getClass();
+                    Class clazz;
+                    if (filed_object instanceof Class) {
+                        clazz = (Class) filed_object;
+                    } else {
+                        clazz = filed_object.getClass();
+                    }
                     if (filed_object instanceof List) {
 
                     } else if (filed_object instanceof Map) {

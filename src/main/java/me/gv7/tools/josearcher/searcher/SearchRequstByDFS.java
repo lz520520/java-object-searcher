@@ -123,7 +123,12 @@ public class SearchRequstByDFS {
         }
 
         String new_log_chain = "";
-        Class clazz = filed_object.getClass();
+        Class clazz;
+        if (filed_object instanceof Class) {
+            clazz = (Class) filed_object;
+        } else {
+            clazz = filed_object.getClass();
+        }
 
         if(log_chain != null && log_chain != ""){
             current_depth++;
